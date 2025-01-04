@@ -147,11 +147,9 @@
 "gfs_sfc",     "soilw2",        "soilw2"        "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "soilw3",        "soilw3"        "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "soilw4",        "soilw4"        "fv3_history2d",  "all",  .false.,  "none",  2
-!+ygan
 "gfs_sfc",     "snowt1",        "snowt1"        "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "snowt2",        "snowt2"        "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "snowt3",        "snowt3"        "fv3_history2d",  "all",  .false.,  "none",  2
-!.ygan
 "gfs_sfc",     "slc_1",         "soill1",       "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "slc_2",         "soill2",       "fv3_history2d",  "all",  .false.,  "none",  2
 "gfs_sfc",     "slc_3",         "soill3",       "fv3_history2d",  "all",  .false.,  "none",  2
