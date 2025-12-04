@@ -692,11 +692,11 @@ case ${step} in
           threads_per_task=5
           walltime="01:40:00"
           ;;
-        "C384" | "C192")
+        "C384" | "C192" | "C96")
           ntasks=160
           threads_per_task=10
           ;;
-        "C96" | "C48")
+        "C48")
           ntasks=84
           threads_per_task=5
           ;;

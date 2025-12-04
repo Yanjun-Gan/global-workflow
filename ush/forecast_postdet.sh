@@ -215,7 +215,8 @@ EOF
       fi
 
       if [[ "${RUN}" = "enkfgfs" ]] || [[ "${RUN}" = "enkfgdas" ]]; then
-          prefix_atminc="recentered_"
+          #prefix_atminc="recentered_"
+          prefix_atminc=""
       else
           prefix_atminc=""
       fi

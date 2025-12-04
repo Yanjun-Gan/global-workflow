@@ -27,8 +27,9 @@ if [[ "${DO_JEDIATMENS}" == "YES" ]]; then
 fi
 
 if [[ "${RUN/enkf}" == "gfs" ]]; then  
-    echo "turning off gsi soilda for gfs run"
+    echo "turning off gsi landda for gfs run"
     DO_GSISOILDA="NO"
+    DO_GSISNOWDA="NO"
 fi
 
 # set up soil analysis
@@ -42,4 +43,10 @@ if [[ ${DO_GSISOILDA} == "YES" ]]; then
     export REGRID_EXEC="${HOMEgfs}/exec/regridStates.x"
 fi
 
+# set up snow analysis
+if [[ ${DO_GSISNOWDA} == "YES" ]]; then
+    export GCYCLE_DO_SNOWINCR=".false."
+    export GCYCLE_INTERP_LANDINCR=".false."
+    export REGRID_EXEC="${HOMEgfs}/exec/regridStates.x"
+fi
 echo "END: config.esfc"

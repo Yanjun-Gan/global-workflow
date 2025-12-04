@@ -27,17 +27,28 @@ ntiles=6
 
 APREFIX_ENS="enkfgdas.t${cyc}z."
 
-LSOIL_INCR=${LSOIL_INCR:-2}
+variable_list=""
+n_vars=0
 
-export n_vars=$(( LSOIL_INCR*2 ))
+if [[ ${DO_GSISOILDA} = "YES" ]]; then
+    LSOIL_INCR=${LSOIL_INCR:-2}
+    for vi in $(seq 1 "$LSOIL_INCR"); do
+        variable_list+="\"soilt${vi}_inc\", "
+        n_vars=$((n_vars+1))
+    done
+    for vi in $(seq 1 "$LSOIL_INCR"); do
+        variable_list+="\"slc${vi}_inc\", "
+        n_vars=$((n_vars+1))
+    done
+fi
 
-soil_incr_vars=""
-for vi in $( seq 1 "${LSOIL_INCR}" ); do
-    soil_incr_vars=${soil_incr_vars}'"soilt'${vi}'_inc"',
-done
-for vi in $( seq 1 "${LSOIL_INCR}" ); do
-    soil_incr_vars=${soil_incr_vars}'"slc'${vi}'_inc"',
-done
+if [[ ${DO_GSISNOWDA} = "YES" ]]; then
+    LSNOW_INCR=${LSNOW_INCR:-3}
+    for vi in $(seq 1 "$LSNOW_INCR"); do
+        variable_list+="\"snowt${vi}_inc\", "
+        n_vars=$((n_vars+1))
+    done
+fi
 
 if [[ "${DO_LAND_IAU}" = ".true." ]]; then
     IFS=',' read -ra landifhrs <<< "${IAUFHRS}"

@@ -23,6 +23,7 @@ pwd=$(pwd)
 # Base variables
 DONST=${DONST:-"NO"}
 DO_GSISOILDA=${DO_GSISOILDA:-"NO"}
+DO_GSISNOWDA=${DO_GSISNOWDA:-"NO"}
 DOSFCANL_ENKF=${DOSFCANL_ENKF:-"YES"}
 export CASE=${CASE:-384}
 ntiles=${ntiles:-6}
@@ -57,6 +58,7 @@ DOIAU=${DOIAU_ENKF:-"NO"}
 # Global_cycle stuff
 CYCLESH=${CYCLESH:-${USHgfs}/global_cycle.sh}
 REGRIDSH=${REGRIDSH:-"${USHgfs}/regrid_gsiSfcIncr_to_tile.sh"}
+ADDINCRSH=${ADDINCRSH:-"${USHgfs}/add_snowtemp_incr.sh"}
 export CYCLEXEC=${CYCLEXEC:-${EXECgfs}/global_cycle}
 APRUN_CYCLE=${APRUN_CYCLE:-${APRUN:-""}}
 NTHREADS_CYCLE=${NTHREADS_CYCLE:-${NTHREADS:-1}}
@@ -74,8 +76,8 @@ NTHREADS_ESFC=${NTHREADS_ESFC:-${NTHREADS:-1}}
 # Ignore possible spelling error (nothing is misspelled)
 # shellcheck disable=SC2153
 BDATE=$(date --utc +%Y%m%d%H -d "${PDY} ${cyc} - 3 hours")
-bPDY=${BDATE:0:8}
-bcyc=${BDATE:8:2}
+export bPDY=${BDATE:0:8}
+export bcyc=${BDATE:8:2}
 
 # Get dimension information based on CASE
 res=${CASE:1}
@@ -131,7 +133,7 @@ else
 fi
 
 # regrid the surface increment files
-if [[ "${DO_GSISOILDA}" == "YES" ]]; then
+if [[ "${DO_GSISOILDA}" == "YES" || "${DO_GSISNOWDA}" == "YES" ]]; then
 
     export CASE_IN=${CASE_ENS}
     export CASE_OUT=${CASE_ENS}
@@ -239,6 +241,10 @@ if [[ "$DOIAU" == "YES" ]]; then
 
     done
 
+fi
+
+if  [[ "${DO_GSISNOWDA}" == "YES" ]]; then
+    $ADDINCRSH
 fi
 
 if [[ "${DOSFCANL_ENKF}" == "YES" ]]; then

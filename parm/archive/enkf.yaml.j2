@@ -15,11 +15,11 @@ enkf:
             {% endif %}
         {% endif %}
         - "logs/{{ cycle_YMDH }}/{{ RUN }}_esfc.log"
-        {% if not DO_JEDIATMENS %}
-            {% for grp in range(IAUFHRS | length) %}
-        - "logs/{{ cycle_YMDH }}/{{ RUN }}_ecen{{ '%03d' % grp }}.log"
-            {% endfor %}
-        {% endif %}
+        #{% if not DO_JEDIATMENS %}
+        #    {% for grp in range(IAUFHRS | length) %}
+        #- "logs/{{ cycle_YMDH }}/{{ RUN }}_ecen{{ '%03d' % grp }}.log"
+        #    {% endfor %}
+        #{% endif %}
 
         {% if lobsdiag_forenkf %}
            {% if DO_JEDIATMENS %}
@@ -119,7 +119,7 @@ enkf:
         - "{{ COMIN_ATMOS_ANALYSIS_ENSSTAT | relpath(ROTDIR) }}/{{ head }}ensmean_analysis.atm.a{{ '%03d' % fhr }}.nc"
                 {% else %}
         # Store increments
-        - "{{ COMIN_ATMOS_ANALYSIS_ENSSTAT | relpath(ROTDIR) }}/{{ head }}ensmean_increment.atm.i{{ '%03d' % fhr }}.nc"
+        #- "{{ COMIN_ATMOS_ANALYSIS_ENSSTAT | relpath(ROTDIR) }}/{{ head }}ensmean_increment.atm.i{{ '%03d' % fhr }}.nc"
                 {% endif %}
             {% else %}
         - "{{ COMIN_ATMOS_ANALYSIS_ENSSTAT | relpath(ROTDIR) }}/{{ head }}csg_ensmean_jedi_analysis.atm.a{{ '%03d' % fhr }}.nc"

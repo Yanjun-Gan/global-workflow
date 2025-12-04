@@ -421,12 +421,15 @@ export ENKF_SPREAD="YES"
 #Soil DA and whether it is (land) IAU
 if [[ "${RUN}" == "gdas" || "${RUN}" == "enkfgdas" ]]; then
     export DO_GSISOILDA="{{ DO_GSISOILDA }}"
+    export DO_GSISNOWDA="{{ DO_GSISNOWDA }}"
     export DO_LAND_IAU="{{ DO_LAND_IAU }}"
 else
     export DO_GSISOILDA="NO"
+    export DO_GSISNOWDA="NO"
     export DO_LAND_IAU=".false."
 fi
 export LSOIL_INCR=2
+export LSNOW_INCR=3
 
 # Check if cycle is cold starting, DOIAU off, or free-forecast mode
 if [[ "${MODE}" = "cycled" && "${SDATE}" = "${PDY}${cyc}" && ${EXP_WARM_START} = ".false." ]] || [[ "${DOIAU}" = "NO" ]] || [[ "${MODE}" = "forecast-only" && ${EXP_WARM_START} = ".false." ]] ; then

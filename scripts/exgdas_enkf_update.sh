@@ -86,6 +86,7 @@ else
 fi
 INCREMENTS_TO_ZERO=${INCREMENTS_TO_ZERO:-"'NONE'"}
 DO_GSISOILDA=${DO_GSISOILDA:-"NO"}
+DO_GSISNOWDA=${DO_GSISNOWDA:-"NO"}
 hofx_2m_sfcfile=${hofx_2m_sfcfile:-".false."}
 
 ################################################################################
@@ -203,7 +204,7 @@ for imem in $(seq 1 ${NMEM_ENS}); do
          ${NLN} "${COMOUT_ATMOS_ANALYSIS_MEM}/${APREFIX}increment.atm.i00${FHR}.nc" \
             "incr_${PDY}${cyc}_fhr0${FHR}_${memchar}"
       fi
-      if [[ "${DO_GSISOILDA}" == "YES" ]]; then
+      if [[ "${DO_GSISOILDA}" == "YES" || "${DO_GSISNOWDA}" == "YES" ]]; then
           ${NLN} "${COMOUT_ATMOS_ANALYSIS_MEM}/${APREFIX}increment.sfc.i00${FHR}.nc" \
            "sfcincr_${PDY}${cyc}_fhr0${FHR}_${memchar}"
       fi
@@ -219,7 +220,7 @@ for FHR in ${nfhrs}; do
       ${NLN} "${COMIN_ATMOS_HISTORY_STAT_PREV}/${GPREFIX}ensmean.sfc.f00${FHR}.nc" \
          "sfgsfc_${PDY}${cyc}_fhr0${FHR}_ensmean"
    fi
-   if [[ "${DO_GSISOILDA}" == "YES" ]]; then
+   if [[ "${DO_GSISOILDA}" == "YES" || "${DO_GSISNOWDA}" == "YES" ]]; then
       ${NLN} "${COMIN_ATMOS_HISTORY_STAT_PREV}/${GPREFIX}ensmean.sfc.f00${FHR}.nc" \
          "bfg_${PDY}${cyc}_fhr0${FHR}_ensmean"
       ${NLN} "${COMIN_ATMOS_ANALYSIS_STAT}/${APREFIX}increment.sfc.i00${FHR}.nc" \
